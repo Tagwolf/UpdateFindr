@@ -1,165 +1,95 @@
-/* Grundlegendes Reset und Basisfarben */
+/* Reset & Basis */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #ddd;
+  user-select: none;
 }
 
 body {
   background-color: #121212;
   color: #ddd;
-  line-height: 1.6;
+  font-size: 16px;
+  line-height: 1.5;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  font-size: 16px;
-}
-
-/* Container */
-.container-profil-wrapper {
-  padding: 20px;
-}
-
-.container-profil2 {
-  display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 15px 30px;
-  background: #1f1f1f;
-  border-bottom: 1px solid #333;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.7);
+  padding: 30px 20px;
 }
 
-.logo {
-  height: 48px;
-  cursor: pointer;
-  filter: drop-shadow(0 0 4px #3fa9f5);
-  transition: filter 0.3s ease;
-}
-
-.logo:hover {
-  filter: drop-shadow(0 0 8px #3fa9f5);
-}
-
-.search-container {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.search-container input[type="text"] {
-  padding: 8px 14px;
-  border-radius: 6px;
-  border: none;
-  background: #222;
-  color: #eee;
-  width: 200px;
-  transition: background-color 0.3s ease;
-}
-
-.search-container input[type="text"]:focus {
-  background: #333;
-  outline: none;
-}
-
-.search-container button {
-  padding: 8px 16px;
-  background: #3fa9f5;
-  border: none;
-  border-radius: 6px;
-  color: white;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.search-container button:hover {
-  background: #1c6cd9;
-}
-
-/* Profilcontainer */
+/* Hauptcontainer */
 .container-profil {
-  max-width: 960px;
-  margin: 20px auto;
+  width: 100%;
+  max-width: 1000px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+  margin-bottom: 50px;
+}
+
+/* Einzelne Card-Boxen */
+.card {
   background: #1f1f1f;
-  border-radius: 12px;
-  box-shadow: 0 0 20px rgba(63, 169, 245, 0.3);
-  padding: 25px;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+  padding: 25px 30px;
   display: flex;
-  gap: 30px;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: default;
 }
 
-/* Profilbereich */
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 32px rgba(63,169,245,0.5);
+}
+
+/* Profilbereich links (Skin + Name + Streak) */
 .profil {
-  flex: 2;
   display: flex;
+  flex-direction: column;
   gap: 20px;
-  flex-direction: row;
-  align-items: flex-start;
+  align-items: center;
+  text-align: center;
 }
 
-/* Skin-Render */
 .skin-render img#skinImage {
   width: 180px;
   height: 360px;
-  border-radius: 12px;
-  background: linear-gradient(135deg, #2a2a2a, #111);
-  box-shadow: 0 0 10px #3fa9f5;
+  border-radius: 16px;
+  box-shadow: 0 0 15px #3fa9f5;
+  background: linear-gradient(135deg, #222, #111);
   image-rendering: pixelated;
-  border: 2px solid #3fa9f5;
+  border: 3px solid #3fa9f5;
+  margin-bottom: 20px;
 }
 
-/* Nachrichten-Container */
-.message-container {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-/* Player Header */
-.player-header {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  margin-bottom: 15px;
-}
-
-.player-header h2#playerName {
-  font-size: 2rem;
+/* Spielername */
+#playerName {
+  font-size: 2.5rem;
   color: #3fa9f5;
-  text-shadow: 0 0 6px #3fa9f5;
+  font-weight: 900;
+  text-shadow: 0 0 12px #3fa9f5;
+  margin-bottom: 6px;
 }
 
-/* Views */
-.views {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  color: #bbb;
-  font-weight: 600;
-}
-
-.views ion-icon {
-  font-size: 18px;
-  color: #3fa9f5;
-}
-
-/* Streak-Anzeige */
+/* Streak Anzeige */
 #streakDisplay {
   font-weight: 700;
-  color: #65d468; /* ein schönes Grün */
-  font-size: 1.1rem;
-  margin-top: 6px;
-  text-shadow: 0 0 6px #65d468;
+  font-size: 1.3rem;
+  color: #65d468;
+  text-shadow: 0 0 8px #65d468;
+  margin-bottom: 14px;
 }
 
-/* Status Container */
+/* Status-Container */
 .status-container {
   display: flex;
-  gap: 20px;
+  justify-content: center;
+  gap: 30px;
   margin-top: 10px;
 }
 
@@ -167,61 +97,66 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
-  font-weight: 700;
-  font-size: 0.9rem;
+  gap: 6px;
   color: #bbb;
+  font-weight: 700;
+  font-size: 0.95rem;
+  user-select: none;
 }
 
-/* Status-Indikatoren */
 .status-indicator {
-  width: 24px;
-  height: 24px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
+  box-shadow: 0 0 8px rgba(0,0,0,0.7);
   position: relative;
   cursor: default;
-  box-shadow: 0 0 5px rgba(0,0,0,0.5);
+  transition: box-shadow 0.3s ease;
 }
 
 .status-indicator.scammer-no {
   background-color: #444;
-  box-shadow: 0 0 10px #cc3333;
+  box-shadow: 0 0 15px #cc3333;
 }
 
 .status-indicator.scammer-yes {
   background-color: #cc3333;
-  box-shadow: 0 0 14px #ff5555;
+  box-shadow: 0 0 20px #ff5555;
 }
 
 .status-indicator.mm-no {
   background-color: #444;
-  box-shadow: 0 0 10px #3fa9f5;
+  box-shadow: 0 0 15px #3fa9f5;
 }
 
 .status-indicator.mm-yes {
   background-color: #3fa9f5;
-  box-shadow: 0 0 14px #66baff;
+  box-shadow: 0 0 20px #66baff;
 }
 
-/* Tooltip Styling */
+.status-indicator:hover {
+  filter: brightness(1.2);
+}
+
+/* Tooltip */
 .tooltip {
   visibility: hidden;
-  width: 200px;
   background-color: #222;
   color: #eee;
-  text-align: left;
+  font-size: 0.85rem;
   border-radius: 8px;
-  padding: 10px;
+  padding: 10px 14px;
   position: absolute;
-  z-index: 10;
   bottom: 150%;
   left: 50%;
-  margin-left: -100px;
-  box-shadow: 0 0 8px rgba(63, 169, 245, 0.7);
-  font-size: 0.85rem;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: 220px;
+  box-shadow: 0 0 12px rgba(63, 169, 245, 0.7);
   opacity: 0;
-  transition: opacity 0.3s;
+  transition: opacity 0.25s ease;
   pointer-events: none;
+  z-index: 20;
 }
 
 .status-indicator:hover .tooltip {
@@ -230,50 +165,50 @@ body {
   pointer-events: auto;
 }
 
-/* Badges */
-.badges-area {
-  margin-top: 20px;
+/* Nachrichtenbereich rechts */
+.message-container {
   display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.message {
+  background: #181818;
+  padding: 20px 25px;
+  border-radius: 16px;
+  box-shadow: inset 0 0 20px rgba(63, 169, 245, 0.3);
+  flex-grow: 1;
+  overflow-y: auto;
+  max-height: 400px;
+  font-size: 0.95rem;
+  color: #ccc;
+  line-height: 1.4;
+}
+
+.message .info-text {
+  display: flex;
+  align-items: center;
   gap: 10px;
-  flex-wrap: wrap;
-}
-
-/* Verification Notification */
-.verification-notification {
-  margin-top: 15px;
-  background-color: #263238;
-  padding: 12px 18px;
-  border-radius: 10px;
-  color: #a9d6e5;
+  margin-bottom: 12px;
   font-weight: 600;
-  box-shadow: 0 0 10px #3fa9f5;
+  color: #3fa9f5;
 }
 
-.verification-notification a.verify-button {
-  background: #3fa9f5;
-  padding: 8px 15px;
-  margin-left: 10px;
-  border-radius: 8px;
-  color: white;
-  text-decoration: none;
-  font-weight: 700;
-  transition: background-color 0.3s ease;
+.message .info-text ion-icon {
+  font-size: 20px;
 }
 
-.verification-notification a.verify-button:hover {
-  background: #1c6cd9;
-}
-
-/* Suchleiste für Nachrichten */
 .search-bar input[type="text"] {
   width: 100%;
-  padding: 8px 14px;
-  border-radius: 8px;
+  padding: 10px 16px;
+  border-radius: 12px;
   border: none;
   background: #222;
   color: #eee;
   font-size: 1rem;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
+  box-shadow: 0 0 6px rgba(63,169,245,0.5);
+  transition: background-color 0.3s ease;
 }
 
 .search-bar input[type="text"]:focus {
@@ -281,68 +216,78 @@ body {
   outline: none;
 }
 
-/* Nachrichtenbereich */
-.message {
-  background: #181818;
-  border-radius: 12px;
-  padding: 12px 16px;
-  box-shadow: inset 0 0 15px rgba(63, 169, 245, 0.3);
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.info-text {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.9rem;
-  color: #888;
-  margin-bottom: 8px;
-}
-
-.info-icon {
-  font-weight: 700;
-  color: #3fa9f5;
-}
-
 /* Name History */
 .name-history {
-  flex: 1;
   background: #1f1f1f;
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 0 20px rgba(63, 169, 245, 0.25);
+  padding: 20px 25px;
+  border-radius: 16px;
+  box-shadow: 0 0 20px rgba(63, 169, 245, 0.3);
+  color: #bbb;
+  font-size: 0.95rem;
+  max-height: 450px;
+  overflow-y: auto;
 }
 
 .name-history h3 {
-  font-size: 1.3rem;
   color: #3fa9f5;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
+  font-size: 1.5rem;
+  font-weight: 700;
 }
 
-.name-history-list {
-  max-height: 450px;
-  overflow-y: auto;
-  color: #bbb;
-  font-size: 0.95rem;
+/* Badges Bereich */
+.badges-area {
+  margin-top: 30px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* Verification Notification */
+.verification-notification {
+  background-color: #263238;
+  padding: 14px 20px;
+  border-radius: 16px;
+  color: #a9d6e5;
+  font-weight: 600;
+  box-shadow: 0 0 16px #3fa9f5;
+  display: inline-flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: 25px;
+}
+
+.verification-notification a.verify-button {
+  background: #3fa9f5;
+  padding: 10px 22px;
+  border-radius: 14px;
+  color: white;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 0 12px #1c6cd9;
+  transition: background-color 0.3s ease;
+}
+
+.verification-notification a.verify-button:hover {
+  background: #1c6cd9;
 }
 
 /* Footer */
 .below-profile-footer {
-  background: #141414;
+  width: 100%;
+  max-width: 1000px;
   text-align: center;
-  padding: 18px 10px;
-  font-size: 0.85rem;
   color: #666;
-  border-top: 1px solid #333;
+  font-size: 0.85rem;
   margin-top: auto;
+  padding-bottom: 20px;
+  user-select: none;
 }
 
 .below-profile-footer a {
   color: #3fa9f5;
-  text-decoration: none;
   font-weight: 600;
+  text-decoration: none;
   transition: color 0.3s ease;
 }
 
@@ -350,22 +295,37 @@ body {
   color: #1c6cd9;
 }
 
-/* Scrollbar Styling für dunkles Design */
+/* Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 10px;
 }
 
 ::-webkit-scrollbar-track {
   background: #222;
-  border-radius: 8px;
+  border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
   background: #3fa9f5;
-  border-radius: 8px;
+  border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: #1c6cd9;
+}
+
+/* Responsive */
+@media (max-width: 840px) {
+  .container-profil {
+    grid-template-columns: 1fr;
+  }
+  .profil {
+    flex-direction: row;
+    justify-content: center;
+    gap: 40px;
+  }
+  .skin-render img#skinImage {
+    width: 140px;
+    height: 280px;
+  }
 }
