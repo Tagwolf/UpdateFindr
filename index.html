@@ -3,12 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Findr - Profil</title>
+  <title>Findr Profilseite</title>
+
+  <!-- Stylesheet -->
   <link rel="stylesheet" href="style.css" />
 
-  <!-- Skinview3D und weitere Skripte -->
+  <!-- Skinview3D für Minecraft-Skin-Rendering -->
   <script src="https://cdn.jsdelivr.net/npm/skinview3d@3.0.0/bundles/skinview3d.bundle.min.js" defer></script>
-  <script src="https://unpkg.com/virtual-scroll-list" defer></script>
+
+  <!-- Ionicons für Icons -->
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js" defer></script>
+
+  <!-- Eigene Scripts -->
   <script src="console.js" defer></script>
   <script src="script.js" defer></script>
 
@@ -21,237 +27,370 @@
     gtag('config', 'G-DWDFHDJ4R3');
   </script>
 
-  <!-- Ionicons -->
-  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-
   <style>
-    /* Deine Styles hier oder in style.css */
+    /* Grundlayout & Styles */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #121212;
+      color: #ddd;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    a {
+      color: #1e90ff;
+      text-decoration: none;
+    }
+
+    a:hover,
+    a:focus {
+      text-decoration: underline;
+      outline: none;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 1rem auto;
+      padding: 1rem;
+      background-color: #1e1e1e;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.7);
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #333;
+    }
+
+    header img.logo {
+      height: 50px;
+    }
+
+    .search {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .search input[type="text"] {
+      padding: 0.5rem;
+      font-size: 1rem;
+      border-radius: 4px;
+      border: 1px solid #444;
+      background-color: #222;
+      color: #eee;
+      width: 200px;
+    }
+
+    .search input[type="text"]:focus {
+      outline: 2px solid #1e90ff;
+      border-color: #1e90ff;
+    }
+
+    .search button {
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 4px;
+      background-color: #1e90ff;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+
+    .search button:hover,
+    .search button:focus {
+      background-color: #005bbb;
+      outline: none;
+    }
+
+    main {
+      margin-top: 1rem;
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .skin-render {
+      flex: 0 0 160px;
+      background-color: #2c2c2c;
+      border-radius: 8px;
+      padding: 0.5rem;
+      text-align: center;
+      box-shadow: inset 0 0 10px #000;
+    }
+
+    .skin-render img {
+      width: 150px;
+      border-radius: 4px;
+      user-select: none;
+    }
+
+    .profile-info {
+      flex: 1 1 600px;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .profile-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .profile-header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+      user-select: text;
+    }
+
     .views {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
-      font-size: 1.1rem;
-      color: #666;
-    }
-
-    .visitor-count {
-      font-weight: bold;
-    }
-
-    ion-icon {
+      gap: 0.3rem;
       font-size: 1.2rem;
+      color: #aaa;
     }
 
-    /* Tooltip Styles für Status-Infos */
-    .status-indicator {
+    .views ion-icon {
+      font-size: 1.3rem;
+      color: #ccc;
+    }
+
+    .status {
+      display: flex;
+      gap: 1rem;
+      font-size: 0.9rem;
+    }
+
+    .status-item {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      cursor: help;
       position: relative;
-      display: inline-block;
+    }
+
+    .status-dot {
       width: 14px;
       height: 14px;
       border-radius: 50%;
-      margin-left: 0.5rem;
-      cursor: help;
+      display: inline-block;
     }
-    .status-indicator.scammer-no { background-color: #28a745; }  /* grün */
-    .status-indicator.scammer-yes { background-color: #dc3545; } /* rot */
-    .status-indicator.mm-no { background-color: #28a745; }
-    .status-indicator.mm-yes { background-color: #ffc107; } /* gelb */
 
-    .status-indicator:hover .tooltip,
-    .status-indicator:focus .tooltip {
-      visibility: visible;
-      opacity: 1;
-    }
+    .scammer-yes { background-color: #e74c3c; }
+    .scammer-no { background-color: #2ecc71; }
+    .mm-yes { background-color: #f39c12; }
+    .mm-no { background-color: #2ecc71; }
 
     .tooltip {
-      visibility: hidden;
-      opacity: 0;
-      width: 220px;
-      background-color: rgba(0, 0, 0, 0.75);
-      color: #fff;
-      text-align: left;
-      border-radius: 4px;
-      padding: 0.5rem;
       position: absolute;
-      z-index: 100;
-      bottom: 125%;
+      bottom: 130%;
       left: 50%;
-      margin-left: -110px;
-      transition: opacity 0.3s;
+      transform: translateX(-50%);
+      background-color: rgba(0,0,0,0.85);
+      color: white;
+      padding: 0.5rem;
+      border-radius: 5px;
       font-size: 0.8rem;
+      width: 220px;
+      opacity: 0;
       pointer-events: none;
-      line-height: 1.3;
+      transition: opacity 0.3s ease;
+      z-index: 10;
     }
 
-    .tooltip a {
-      color: #90caf9;
+    .status-item:hover .tooltip,
+    .status-item:focus-within .tooltip {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .badges {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      background-color: #444;
+      color: #eee;
+      padding: 0.3rem 0.6rem;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      user-select: none;
+    }
+
+    .verification {
+      background-color: #004085;
+      color: white;
+      padding: 0.8rem 1rem;
+      border-radius: 6px;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .verification a {
+      color: #a8d0ff;
+      font-weight: bold;
       text-decoration: underline;
     }
 
-    /* Verifizierungs-Button */
-    .verify-button {
-      background-color: #007bff;
-      color: white;
-      padding: 0.4rem 1rem;
+    .message-search input {
+      width: 100%;
+      max-width: 600px;
+      padding: 0.5rem;
+      font-size: 1rem;
       border-radius: 4px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-      display: inline-block;
-    }
-    .verify-button:hover,
-    .verify-button:focus {
-      background-color: #0056b3;
-      outline: none;
+      border: 1px solid #444;
+      background-color: #222;
+      color: #eee;
+      margin-bottom: 0.5rem;
     }
 
-    /* Verbesserte Buttons & Inputs */
-    input[type="text"], input[type="search"] {
-      padding: 0.4rem 0.8rem;
-      font-size: 1rem;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      width: 100%;
-      max-width: 300px;
-      box-sizing: border-box;
-      transition: border-color 0.3s ease;
+    .message-list {
+      height: 350px;
+      overflow-y: auto;
+      background-color: #2c2c2c;
+      border-radius: 6px;
+      padding: 0.5rem;
+      font-family: monospace;
+      font-size: 0.9rem;
+      color: #ccc;
+      user-select: text;
     }
-    input[type="text"]:focus, input[type="search"]:focus {
-      border-color: #007bff;
-      outline: none;
+
+    .name-history {
+      margin-top: 2rem;
     }
-    button {
-      padding: 0.45rem 1.1rem;
-      background-color: #007bff;
-      color: white;
-      border: none;
-      border-radius: 4px;
+
+    .name-history h2 {
+      margin-bottom: 0.5rem;
       font-weight: 600;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
     }
-    button:hover, button:focus {
-      background-color: #0056b3;
+
+    .name-list {
+      background-color: #222;
+      border-radius: 6px;
+      padding: 0.5rem;
+      font-size: 0.9rem;
+      color: #bbb;
+      user-select: text;
+    }
+
+    footer {
+      margin-top: auto;
+      padding: 1rem;
+      background-color: #1e1e1e;
+      text-align: center;
+      font-size: 0.8rem;
+      color: #666;
+    }
+
+    footer a {
+      color: #666;
+    }
+
+    footer a:hover,
+    footer a:focus {
+      color: #aaa;
       outline: none;
     }
   </style>
 </head>
-
 <body>
-  <div style="display: flex; flex-direction: column; min-height: 100vh;">
-    <!-- Kopfbereich mit Logo und Suchfunktion -->
-    <div class="container-profil2" role="banner" aria-label="Findr Kopfbereich">
-      <a href="/findr/" aria-label="Zur Startseite von Findr">
+  <div class="container">
+    <header>
+      <a href="/findr/" aria-label="Zur Startseite">
         <img src="https://i.ibb.co/k0TcbnJ/minecraft-title-8.png" alt="Findr Logo" class="logo" />
       </a>
-      <div class="search-container" role="search" aria-label="Spieler suchen">
+      <div class="search" role="search" aria-label="Spieler suchen">
         <input
           type="text"
           id="playerInput"
           placeholder="Minecraft-Namen suchen..."
           maxlength="16"
-          aria-required="true"
           autocomplete="off"
           spellcheck="false"
+          aria-required="true"
+          aria-label="Minecraft-Spielername eingeben"
         />
         <button onclick="searchPlayer()" aria-label="Spieler suchen">Suchen</button>
       </div>
-    </div>
+    </header>
 
-    <!-- Hauptprofilcontainer -->
-    <main class="container-profil" role="main" aria-live="polite">
-      <div class="profil" aria-label="Spielerprofil">
-
-        <!-- Skin-Render -->
-        <div class="skin-render" aria-label="Skin des Spielers">
-          <img id="skinImage" alt="Skin wird geladen..." />
-        </div>
-
-        <!-- Spieler-Infos und Status -->
-        <div class="message-container">
-          <div class="player-header">
-            <h2 id="playerName" tabindex="0" aria-live="polite">Spielername</h2>
-            <div class="views" aria-label="Anzahl der Profilaufrufe">
-              <span class="visitor-count" aria-live="polite">0</span>
-              <ion-icon name="eye-outline" aria-hidden="true"></ion-icon>
-            </div>
-
-            <div class="status-container" aria-label="Spielerstatus">
-              <div class="status-item" tabindex="0" aria-describedby="tooltipScammer" role="tooltip">
-                <span class="bold">Scammer</span>
-                <div class="status-indicator scammer-no" id="scammerStatus" tabindex="0" aria-label="Kein Scammer">
-                  <span class="tooltip" id="tooltipScammer" role="tooltip">
-                    Quelle: <a href="https://raw.githubusercontent.com/CommunityRadarGG/CommunityRadar_Lists/refs/heads/main/versions/v2/scammer.json" target="_blank" rel="noopener noreferrer">Community Radar Liste</a><br />
-                    Community Radar:<br />
-                    <a href="https://community-radar.de/" target="_blank" rel="noopener noreferrer">Website</a><br />
-                    <a href="https://discord.community-radar.de" target="_blank" rel="noopener noreferrer">Discord Server</a>
-                  </span>
-                </div>
-              </div>
-
-              <div class="status-item" tabindex="0" aria-describedby="tooltipMM" role="tooltip">
-                <span class="bold">MM</span>
-                <div class="status-indicator mm-no" id="mmStatus" tabindex="0" aria-label="Nicht im MM Verfahren">
-                  <span class="tooltip" id="tooltipMM" role="tooltip">
-                    Quelle: <a href="https://raw.githubusercontent.com/CommunityRadarGG/CommunityRadar_Lists/refs/heads/main/versions/v2/trusted.json" target="_blank" rel="noopener noreferrer">CommunityRadar</a><br />
-                    Community Radar:<br />
-                    <a href="https://community-radar.de/" target="_blank" rel="noopener noreferrer">Website</a><br />
-                    <a href="https://discord.community-radar.de" target="_blank" rel="noopener noreferrer">Discord Server</a>
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Badges Bereich -->
-          <div class="badges-area" id="badgesArea" aria-label="Badges des Spielers"></div>
-
-          <!-- Verifizierungsbenachrichtigung -->
-          <div class="verification-notification" id="verificationNotification" style="display: none;" role="alert" aria-live="assertive">
-            <div class="verification-content">
-              <span id="verificationMessage">Bist du <span id="playerNameVerify">Spielername</span>?</span>
-              <a href="https://zeppelino.de/findr/verify" class="verify-button" role="button" tabindex="0" style="text-decoration: none;">Profil verifizieren</a>
-            </div>
-          </div>
-
-          <!-- Nachrichten-Suche -->
-          <div class="search-bar">
-            <input
-              type="search"
-              id="messageSearch"
-              placeholder="Nachrichten durchsuchen..."
-              aria-label="Nachrichten durchsuchen"
-              autocomplete="off"
-              oninput="searchMessage()"
-            />
-          </div>
-
-          <!-- Nachrichtenanzeige -->
-          <section class="message" aria-label="Cloud-Nachrichten">
-            <div class="info-text" role="note">
-              <span class="info-icon" aria-hidden="true">ℹ</span>
-              <span class="info-content">Cloud-Nachrichten</span>
-            </div>
-            <div id="virtualScroller" style="height: 500px; overflow-y: auto;" tabindex="0" aria-live="polite" aria-relevant="additions">
-              <div id="playerMessage"></div>
-            </div>
-          </section>
-        </div>
+    <main>
+      <div class="skin-render" aria-label="Minecraft Skin">
+        <img id="skinImage" alt="Spielerskin" />
       </div>
 
-      <!-- Namenshistorie -->
-      <section class="name-history" aria-label="Frühere Spielernamen">
-        <h3>Frühere Namen</h3>
-        <div class="info-text" role="note">
-          <span class="info-icon" aria-hidden="true">ℹ</span>
-          <span class="info-content">Tracking ab erster Cloud Chat Nachricht.</span>
+      <section class="profile-info" aria-live="polite">
+        <div class="profile-header">
+          <h1 id="playerName" tabindex="0">Spielername</h1>
+          <div class="views" aria-label="Profilaufrufe">
+            <span id="visitCount">0</span>
+            <ion-icon name="eye-outline" aria-hidden="true"></ion-icon>
+          </div>
         </div>
-        <div class="name-history-list" id="nameHistoryList"></div>
+
+        <div class="status" aria-label="Spielerstatus">
+          <div class="status-item" tabindex="0">
+            <span>Scammer:</span>
+            <span id="scammerStatus" class="status-dot scammer-no" aria-label="Kein Scammer"></span>
+            <div class="tooltip" role="tooltip">
+              Quelle: <a href="https://raw.githubusercontent.com/CommunityRadarGG/CommunityRadar_Lists/refs/heads/main/versions/v2/scammer.json" target="_blank" rel="noopener noreferrer">Community Radar Liste</a><br />
+              <a href="https://community-radar.de/" target="_blank" rel="noopener noreferrer">Website</a><br />
+              <a href="https://discord.community-radar.de" target="_blank" rel="noopener noreferrer">Discord Server</a>
+            </div>
+          </div>
+          <div class="status-item" tabindex="0">
+            <span>MM:</span>
+            <span id="mmStatus" class="status-dot mm-no" aria-label="Nicht im MM Verfahren"></span>
+            <div class="tooltip" role="tooltip">
+              Quelle: <a href="https://raw.githubusercontent.com/CommunityRadarGG/CommunityRadar_Lists/refs/heads/main/versions/v2/trusted.json" target="_blank" rel="noopener noreferrer">CommunityRadar</a><br />
+              <a href="https://community-radar.de/" target="_blank" rel="noopener noreferrer">Website</a><br />
+              <a href="https://discord.community-radar.de" target="_blank" rel="noopener noreferrer">Discord Server</a>
+            </div>
+          </div>
+        </div>
+
+        <div id="badgesArea" class="badges" aria-label="Badges des Spielers"></div>
+
+        <div id="verificationNotification" class="verification" role="alert" style="display:none;">
+          Bist du <span id="playerNameVerify">Spielername</span>? <a href="https://zeppelino.de/findr/verify" target="_blank" rel="noopener noreferrer">Profil verifizieren</a>
+        </div>
+
+        <div class="message-search">
+          <input
+            type="search"
+            id="messageSearch"
+            placeholder="Nachrichten durchsuchen..."
+            aria-label="Nachrichten durchsuchen"
+            oninput="searchMessage()"
+          />
+        </div>
+
+        <div id="virtualScroller" class="message-list" tabindex="0" aria-live="polite" aria-relevant="additions">
+          <div id="playerMessage"></div>
+        </div>
+
+        <section class="name-history" aria-label="Namenshistorie">
+          <h2>Frühere Namen</h2>
+          <p>Tracking ab erster Cloud Chat Nachricht.</p>
+          <div id="nameHistoryList" class="name-list"></div>
+        </section>
       </section>
     </main>
 
-    <!-- Fußzeile -->
-    <footer class="below-profile-footer" role="contentinfo">
+    <footer>
       <p>Findr gilt nicht als Beweis. Bitte erstelle Chatlogs mit GrieferGames Funktionen.</p>
       <p>
         © 2025 zeppelino.de - Alle Rechte vorbehalten |
@@ -260,5 +399,27 @@
       </p>
     </footer>
   </div>
+
+  <script>
+    // Hier kannst du deine JS-Funktionen ergänzen oder einbinden
+    function searchPlayer() {
+      const player = document.getElementById('playerInput').value.trim();
+      if (!player) {
+        alert('Bitte gib einen Spielernamen ein.');
+        return;
+      }
+      // TODO: API-Call oder Verarbeitung
+      console.log('Suche nach Spieler:', player);
+    }
+
+    function searchMessage() {
+      const filter = document.getElementById('messageSearch').value.toLowerCase();
+      const messages = document.getElementById('playerMessage').children;
+      for (let msg of messages) {
+        msg.style.display = msg.textContent.toLowerCase().includes(filter) ? '' : 'none';
+      }
+    }
+  </script>
 </body>
 </html>
+
