@@ -1,331 +1,506 @@
-/* Reset & Basis */
+/* Global Styles */
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: #ddd;
-  user-select: none;
+  margin: 0;
+  padding: 0;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 body {
-  background-color: #121212;
+  background: #121212;
   color: #ddd;
-  font-size: 16px;
-  line-height: 1.5;
   min-height: 100vh;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 30px 20px;
-}
-
-/* Hauptcontainer */
-.container-profil {
-  width: 100%;
-  max-width: 1000px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 25px;
-  margin-bottom: 50px;
-}
-
-/* Einzelne Card-Boxen */
-.card {
-  background: #1f1f1f;
-  border-radius: 16px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.6);
-  padding: 25px 30px;
-  display: flex;
-  flex-direction: column;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: default;
-}
-
-.card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 16px 32px rgba(63,169,245,0.5);
-}
-
-/* Profilbereich links (Skin + Name + Streak) */
-.profil {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  align-items: center;
-  text-align: center;
-}
-
-.skin-render img#skinImage {
-  width: 180px;
-  height: 360px;
-  border-radius: 16px;
-  box-shadow: 0 0 15px #3fa9f5;
-  background: linear-gradient(135deg, #222, #111);
-  image-rendering: pixelated;
-  border: 3px solid #3fa9f5;
-  margin-bottom: 20px;
-}
-
-/* Spielername */
-#playerName {
-  font-size: 2.5rem;
-  color: #3fa9f5;
-  font-weight: 900;
-  text-shadow: 0 0 12px #3fa9f5;
-  margin-bottom: 6px;
-}
-
-/* Streak Anzeige */
-#streakDisplay {
-  font-weight: 700;
-  font-size: 1.3rem;
-  color: #65d468;
-  text-shadow: 0 0 8px #65d468;
-  margin-bottom: 14px;
-}
-
-/* Status-Container */
-.status-container {
-  display: flex;
   justify-content: center;
-  gap: 30px;
-  margin-top: 10px;
+  padding: 1rem;
 }
 
-.status-item {
+/* Container */
+.container-profil-wrapper {
+  /* aktuell leer, kann genutzt werden */
+}
+
+.container-profil2 {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  gap: 6px;
-  color: #bbb;
-  font-weight: 700;
-  font-size: 0.95rem;
+  max-width: 960px;
+  width: 100%;
+  margin-bottom: 1.5rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.logo {
+  height: 48px;
+  filter: drop-shadow(0 0 5px #00bfffaa);
+  cursor: pointer;
+  user-select: none;
+  transition: filter 0.3s ease;
+}
+
+.logo:hover {
+  filter: drop-shadow(0 0 8px #00e5ff);
+}
+
+/* Search */
+.search-container {
+  display: flex;
+  gap: 0.5rem;
+  flex: 1;
+  max-width: 400px;
+}
+
+#playerInput {
+  flex: 1;
+  padding: 0.5rem 1rem;
+  border-radius: 12px 0 0 12px;
+  border: none;
+  font-size: 1rem;
+  background: #1f1f1f;
+  color: #eee;
+  outline-offset: 2px;
+  box-shadow: inset 0 0 5px #000;
+}
+
+#playerInput::placeholder {
+  color: #666;
+}
+
+button {
+  background: #00bfff;
+  border: none;
+  color: #fff;
+  font-weight: 600;
+  padding: 0 1.2rem;
+  border-radius: 0 12px 12px 0;
+  cursor: pointer;
+  font-size: 1rem;
+  box-shadow: 0 3px 6px #0099ccaa;
+  user-select: none;
+  transition: background-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+button:hover {
+  background: #00e5ff;
+  box-shadow: 0 5px 12px #00ccffaa;
+}
+
+/* Profil Container */
+.container-profil {
+  max-width: 960px;
+  width: 100%;
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  background: #1a1a1a;
+  padding: 1.5rem 2rem;
+  border-radius: 18px;
+  box-shadow: 0 0 12px #00bfff88;
+}
+
+/* Profil Box */
+.profil {
+  flex: 1 1 350px;
+  background: #222;
+  border-radius: 16px;
+  box-shadow: inset 0 0 15px #00bfff44;
+  padding: 1.5rem;
+  display: flex;
+  gap: 1.5rem;
+  flex-direction: column;
+}
+
+/* Skin Render */
+.skin-render {
+  align-self: center;
+  width: 160px;
+  height: 160px;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 0 15px #00bfffaa;
+  background: linear-gradient(135deg, #0f0f0f, #202020);
+  border: 2px solid #00bfff;
+}
+
+.skin-render img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  image-rendering: pixelated;
   user-select: none;
 }
 
-.status-indicator {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  box-shadow: 0 0 8px rgba(0,0,0,0.7);
-  position: relative;
+/* Message Container */
+.message-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Player Header */
+.player-header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#playerName {
+  font-size: 2rem;
+  color: #00bfff;
+  text-shadow: 0 0 8px #00bfffaa;
+  user-select: text;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.views {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 1.2rem;
+  color: #888;
+  user-select: none;
+}
+
+.visitor-count {
+  font-weight: 700;
+  color: #00d4ff;
+}
+
+/* Status Container */
+.status-container {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.status-item {
+  background: #111;
+  border-radius: 12px;
+  padding: 0.4rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #ccc;
+  box-shadow: 0 0 6px #000a inset;
   cursor: default;
-  transition: box-shadow 0.3s ease;
+  position: relative;
+}
+
+.status-item span.bold {
+  min-width: 50px;
+}
+
+/* Status Indicators */
+.status-indicator {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  box-shadow: 0 0 4px #000 inset;
+  position: relative;
 }
 
 .status-indicator.scammer-no {
-  background-color: #444;
-  box-shadow: 0 0 15px #cc3333;
+  background: #555;
+  box-shadow: 0 0 6px #555 inset;
 }
 
 .status-indicator.scammer-yes {
-  background-color: #cc3333;
-  box-shadow: 0 0 20px #ff5555;
+  background: #e74c3c;
+  box-shadow: 0 0 10px #e74c3c;
 }
 
 .status-indicator.mm-no {
-  background-color: #444;
-  box-shadow: 0 0 15px #3fa9f5;
+  background: #555;
+  box-shadow: 0 0 6px #555 inset;
 }
 
 .status-indicator.mm-yes {
-  background-color: #3fa9f5;
-  box-shadow: 0 0 20px #66baff;
-}
-
-.status-indicator:hover {
-  filter: brightness(1.2);
+  background: #27ae60;
+  box-shadow: 0 0 10px #27ae60;
 }
 
 /* Tooltip */
 .tooltip {
-  visibility: hidden;
-  background-color: #222;
-  color: #eee;
-  font-size: 0.85rem;
-  border-radius: 8px;
-  padding: 10px 14px;
   position: absolute;
-  bottom: 150%;
+  bottom: 125%;
   left: 50%;
   transform: translateX(-50%);
+  background: #222;
+  padding: 0.5rem 0.7rem;
+  border-radius: 8px;
+  box-shadow: 0 0 10px #000a;
+  font-size: 0.75rem;
+  color: #ccc;
   width: max-content;
-  max-width: 220px;
-  box-shadow: 0 0 12px rgba(63, 169, 245, 0.7);
+  max-width: 250px;
   opacity: 0;
-  transition: opacity 0.25s ease;
   pointer-events: none;
-  z-index: 20;
+  transition: opacity 0.3s ease;
+  user-select: none;
+  z-index: 10;
 }
 
-.status-indicator:hover .tooltip {
-  visibility: visible;
+.status-item:hover .tooltip {
   opacity: 1;
   pointer-events: auto;
 }
 
-/* Nachrichtenbereich rechts */
-.message-container {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.message {
-  background: #181818;
-  padding: 20px 25px;
-  border-radius: 16px;
-  box-shadow: inset 0 0 20px rgba(63, 169, 245, 0.3);
-  flex-grow: 1;
-  overflow-y: auto;
-  max-height: 400px;
-  font-size: 0.95rem;
-  color: #ccc;
-  line-height: 1.4;
-}
-
-.message .info-text {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 12px;
-  font-weight: 600;
-  color: #3fa9f5;
-}
-
-.message .info-text ion-icon {
-  font-size: 20px;
-}
-
-.search-bar input[type="text"] {
-  width: 100%;
-  padding: 10px 16px;
-  border-radius: 12px;
-  border: none;
-  background: #222;
-  color: #eee;
-  font-size: 1rem;
-  margin-bottom: 16px;
-  box-shadow: 0 0 6px rgba(63,169,245,0.5);
-  transition: background-color 0.3s ease;
-}
-
-.search-bar input[type="text"]:focus {
-  background: #333;
-  outline: none;
-}
-
-/* Name History */
-.name-history {
-  background: #1f1f1f;
-  padding: 20px 25px;
-  border-radius: 16px;
-  box-shadow: 0 0 20px rgba(63, 169, 245, 0.3);
-  color: #bbb;
-  font-size: 0.95rem;
-  max-height: 450px;
-  overflow-y: auto;
-}
-
-.name-history h3 {
-  color: #3fa9f5;
-  margin-bottom: 15px;
-  font-size: 1.5rem;
-  font-weight: 700;
-}
-
-/* Badges Bereich */
+/* Badges Area */
 .badges-area {
-  margin-top: 30px;
   display: flex;
-  gap: 12px;
   flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 0.8rem;
 }
 
 /* Verification Notification */
 .verification-notification {
-  background-color: #263238;
-  padding: 14px 20px;
-  border-radius: 16px;
-  color: #a9d6e5;
+  background: #111c22;
+  border: 1.5px solid #005577;
+  color: #88ddff;
+  padding: 1rem 1.2rem;
+  border-radius: 14px;
+  font-size: 0.95rem;
   font-weight: 600;
-  box-shadow: 0 0 16px #3fa9f5;
-  display: inline-flex;
+  box-shadow: 0 0 10px #005577aa;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 15px;
-  margin-top: 25px;
+  margin-top: 1rem;
 }
 
-.verification-notification a.verify-button {
-  background: #3fa9f5;
-  padding: 10px 22px;
+.verify-button {
+  background: #0088cc;
+  padding: 0.4rem 1rem;
   border-radius: 14px;
-  color: white;
+  color: #def;
   font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: background-color 0.25s ease;
+  user-select: none;
+  cursor: pointer;
   text-decoration: none;
-  box-shadow: 0 0 12px #1c6cd9;
+  box-shadow: 0 0 8px #0088ccbb;
+}
+
+.verify-button:hover {
+  background: #00aaff;
+  box-shadow: 0 0 15px #00aaffcc;
+}
+
+/* Search Bar Messages */
+.search-bar {
+  margin-top: 1rem;
+}
+
+#messageSearch {
+  width: 100%;
+  padding: 0.6rem 1rem;
+  border-radius: 14px;
+  border: none;
+  background: #121212;
+  color: #ccc;
+  box-shadow: inset 0 0 10px #000;
+  font-size: 1rem;
+  outline-offset: 2px;
+}
+
+#messageSearch::placeholder {
+  color: #666;
+}
+
+/* Messages Box */
+.message {
+  margin-top: 0.8rem;
+  background: #121212;
+  border-radius: 14px;
+  padding: 1rem;
+  box-shadow: 0 0 12px #00bfff99 inset;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.info-text {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: #666;
+  font-size: 0.9rem;
+  font-style: italic;
+  user-select: none;
+  margin-bottom: 0.8rem;
+}
+
+.info-icon {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+/* Virtual Scroller container */
+.message-virtual-scroller {
+  overflow-y: auto;
+  max-height: 220px;
+  padding-right: 0.5rem;
+  scrollbar-width: thin;
+  scrollbar-color: #00bfff44 transparent;
+}
+
+/* Scrollbar styling for WebKit */
+.message-virtual-scroller::-webkit-scrollbar {
+  width: 8px;
+}
+
+.message-virtual-scroller::-webkit-scrollbar-thumb {
+  background: #00bfff88;
+  border-radius: 8px;
+}
+
+.message-virtual-scroller::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Individual message item */
+.message-virtual-scroller > div {
+  background: #222;
+  margin-bottom: 0.6rem;
+  padding: 0.6rem 1rem;
+  border-radius: 12px;
+  box-shadow: inset 0 0 6px #00bfff55;
+  color: #eee;
+  font-size: 0.9rem;
+  cursor: default;
+  user-select: text;
+  transition: background-color 0.25s ease;
+}
+
+.message-virtual-scroller > div:hover {
+  background: #00bfff22;
+}
+
+/* Responsive adjustments */
+@media (max-width: 720px) {
+  .container-profil2 {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .container-profil {
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  .profil {
+    width: 100%;
+  }
+
+  .skin-render {
+    width: 140px;
+    height: 140px;
+  }
+
+  #playerName {
+    font-size: 1.6rem;
+  }
+}
+
+/* Animations */
+@keyframes glowPulse {
+  0%, 100% {
+    box-shadow: 0 0 8px #00bfffaa;
+  }
+  50% {
+    box-shadow: 0 0 16px #00bfffee;
+  }
+}
+
+/* Add a subtle glowing animation on player name */
+#playerName {
+  animation: glowPulse 3s ease-in-out infinite;
+}
+
+/* Add a subtle glow to badges */
+.badge {
+  padding: 0.2rem 0.6rem;
+  background: #004466;
+  border-radius: 10px;
+  color: #66ccff;
+  font-size: 0.85rem;
+  user-select: none;
+  box-shadow: 0 0 6px #00bfff88;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.03em;
   transition: background-color 0.3s ease;
 }
 
-.verification-notification a.verify-button:hover {
-  background: #1c6cd9;
+.badge:hover {
+  background-color: #0077bb;
+  box-shadow: 0 0 12px #00bfffcc;
 }
 
-/* Footer */
-.below-profile-footer {
-  width: 100%;
-  max-width: 1000px;
-  text-align: center;
-  color: #666;
-  font-size: 0.85rem;
-  margin-top: auto;
-  padding-bottom: 20px;
+/* Button style for other clickable items (like links) */
+.clickable {
+  cursor: pointer;
   user-select: none;
-}
-
-.below-profile-footer a {
-  color: #3fa9f5;
+  color: #00bfff;
   font-weight: 600;
-  text-decoration: none;
   transition: color 0.3s ease;
 }
 
-.below-profile-footer a:hover {
-  color: #1c6cd9;
+.clickable:hover {
+  color: #00e5ff;
+  text-decoration: underline;
 }
 
-/* Scrollbar */
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-::-webkit-scrollbar-track {
+/* Add subtle divider line */
+.divider {
+  height: 1px;
   background: #222;
-  border-radius: 10px;
+  margin: 1rem 0;
 }
 
-::-webkit-scrollbar-thumb {
-  background: #3fa9f5;
-  border-radius: 10px;
+/* Example additional feature: tooltip helper for status explanation */
+.status-item[data-tooltip]:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 140%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #222;
+  padding: 0.5rem 0.7rem;
+  border-radius: 8px;
+  box-shadow: 0 0 10px #000a;
+  font-size: 0.75rem;
+  color: #ccc;
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+  opacity: 1;
+  z-index: 20;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #1c6cd9;
+/* Smooth fade in for all hover tooltips */
+.status-item:hover::after {
+  animation: fadeIn 0.25s ease forwards;
 }
 
-/* Responsive */
-@media (max-width: 840px) {
-  .container-profil {
-    grid-template-columns: 1fr;
+@keyframes fadeIn {
+  from {
+    opacity: 0;
   }
-  .profil {
-    flex-direction: row;
-    justify-content: center;
-    gap: 40px;
-  }
-  .skin-render img#skinImage {
-    width: 140px;
-    height: 280px;
+  to {
+    opacity: 1;
   }
 }
